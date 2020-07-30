@@ -127,13 +127,13 @@ public class WheelTime {
         wv_day.setGravity(gravity);
 
         wv_hours = (WheelView) view.findViewById(R.id.hour);
-        wv_hours.setAdapter(new NumericWheelAdapter(0, 23));
+        wv_hours.setAdapter(new NumericWheelAdapter(this.startHour, 23));
         //wv_hours.setLabel(context.getString(R.string.pickerview_hours));// 添加文字
         wv_hours.setCurrentItem(h);
         wv_hours.setGravity(gravity);
 
         wv_minutes = (WheelView) view.findViewById(R.id.min);
-        wv_minutes.setAdapter(new NumericWheelAdapter(0, 59));
+        wv_minutes.setAdapter(new NumericWheelAdapter(this.startMinute, 59));
         //wv_minutes.setLabel(context.getString(R.string.pickerview_minutes));// 添加文字
         wv_minutes.setCurrentItem(m);
         wv_minutes.setGravity(gravity);
@@ -647,6 +647,9 @@ public class WheelTime {
         wv_seconds.setCyclic(cyclic);
     }
 
+    /**
+     * 获取选择的时间
+     */
     public String getTime() {
         if (isLunarCalendar) {
             //如果是农历 返回对应的公历时间
@@ -660,15 +663,15 @@ public class WheelTime {
                 sb.append((wv_year.getCurrentItem() + startYear)).append("-")
                         .append((wv_month.getCurrentItem() + startMonth)).append("-")
                         .append((wv_day.getCurrentItem() + startDay)).append(" ")
-                        .append(wv_hours.getCurrentItem()).append(":")
-                        .append(wv_minutes.getCurrentItem()).append(":")
+                        .append(wv_hours.getAdapter().getItem(wv_hours.getCurrentItem())).append(":")
+                        .append(wv_minutes.getAdapter().getItem(wv_minutes.getCurrentItem())).append(":")
                         .append(wv_seconds.getCurrentItem());
             } else {
                 sb.append((wv_year.getCurrentItem() + startYear)).append("-")
                         .append((wv_month.getCurrentItem() + startMonth)).append("-")
                         .append((wv_day.getCurrentItem() + 1)).append(" ")
-                        .append(wv_hours.getCurrentItem()).append(":")
-                        .append(wv_minutes.getCurrentItem()).append(":")
+                        .append(wv_hours.getAdapter().getItem(wv_hours.getCurrentItem())).append(":")
+                        .append(wv_minutes.getAdapter().getItem(wv_minutes.getCurrentItem())).append(":")
                         .append(wv_seconds.getCurrentItem());
             }
 
@@ -676,8 +679,8 @@ public class WheelTime {
             sb.append((wv_year.getCurrentItem() + startYear)).append("-")
                     .append((wv_month.getCurrentItem() + 1)).append("-")
                     .append((wv_day.getCurrentItem() + 1)).append(" ")
-                    .append(wv_hours.getCurrentItem()).append(":")
-                    .append(wv_minutes.getCurrentItem()).append(":")
+                    .append(wv_hours.getAdapter().getItem(wv_hours.getCurrentItem())).append(":")
+                    .append(wv_minutes.getAdapter().getItem(wv_minutes.getCurrentItem())).append(":")
                     .append(wv_seconds.getCurrentItem());
         }
 
