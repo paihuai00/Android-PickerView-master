@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 //apply plugin: 'com.novoda.bintray-release'//添加JCenter插件
 
+group='com.github.paihuai00'
 
 
 android {
